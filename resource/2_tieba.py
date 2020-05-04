@@ -4,7 +4,7 @@
 # name: 2_tieba.py
 # date: 2020.05.03
 
-__author__="ddw20191222"
+# __author__="ddw20191222"
 
 from urllib import request
 import urllib
