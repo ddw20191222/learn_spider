@@ -24,15 +24,15 @@ def get_video(url):
 	except Exception as e:
 		print("Error in get_video")
 
-def write_file(filename, file):
-	dir = "E:\\"
-	path = dir + filename
-	try:
-		if not os.path.exists(path):
-			with open(path, "wb") as f:
-				f.write(file)
-	except Exception as e:
-		raise e
+# def write_file(filename, file):
+# 	dir = "E:\\"
+# 	path = dir + filename
+# 	try:
+# 		if not os.path.exists(path):
+# 			with open(path, "wb") as f:
+# 				f.write(file)
+# 	except Exception as e:
+# 		raise e
 
 
 
@@ -52,13 +52,13 @@ def main():
 	# <div class="detail-data" style="height:80px">
 	Stockinfo = soup.find("div", attrs={"class":"detail-data"})
 	print(Stockinfo.prettify())
-	if isinstance(Stockinfo, bs4.element.Tag):
-		keyInfo = Stockinfo.find_all("dt")
-		ValueInfo = Stockinfo.find_all("dd")
-		for i in range(4):
-			key = keyInfo[i].text
-			value = ValueInfo[i].text
-			print(key, value)
+	# if isinstance(Stockinfo, bs4.element.Tag):
+	# 	keyInfo = Stockinfo.find_all("dt")
+	# 	ValueInfo = Stockinfo.find_all("dd")
+	# 	for i in range(4):
+	# 		key = keyInfo[i].text
+	# 		value = ValueInfo[i].text
+	# 		print(key, value)
 
 		# for i in range()
 

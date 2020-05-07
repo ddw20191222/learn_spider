@@ -9,6 +9,7 @@ __author__="ddw20191222"
 
 import requests
 import re
+import time
 
 headers = {
 	"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0"
@@ -33,10 +34,11 @@ def write_data(html):
 
 def douban_spider():
 	start = 1
-	end = 2
+	end = 3
 	url_first_part = "https://movie.douban.com/j/search_subjects?type=movie&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start="
 	print("number", "name", "rate")
 	for i in range(start, end+1):
+		# time.sleep(0.5)
 		print("正在查询第{}页".format(i))
 		url = url_first_part + str((i - 1) * 20)
 		html = load_html(url)
