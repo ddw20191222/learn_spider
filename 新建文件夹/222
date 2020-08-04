@@ -1,0 +1,63 @@
+目标：得到mfi值
+流程：分析网页得到链接，存入到list中；便利list，寻找结果，使用re查询；导出结果
+
+第一步：分析网页
+第一页：https://www.soliao.com/kw?qt=HDPE
+第二页：https://www.soliao.com/kw?qt=HDPE&origin=true&brandMall=false&searchv=1.0.0&&currentIndex=2
+第三页：https://www.soliao.com/kw?qt=HDPE&origin=true&brandMall=false&searchv=1.0.0&&currentIndex=3
+
+猜测currentIndex为页码
+选择https://www.soliao.com/kw?qt=HDPE&origin=true&brandMall=false&searchv=1.0.0&&currentIndex=1
+发现结果正确，但是中间有其他参数，尝试减去
+https://www.soliao.com/kw?qt=HDPE&currentIndex=1，正确
+因此页面的url为https://www.soliao.com/kw?qt=HDPE&currentIndex=n
+
+开始使用第一步
+
+页面可以接受，那么开始第1.2 导出材料的href
+<a href="/item/39033-seccohd5401aa.html" target="_blank" style="display: inline-block;margin: 0 1px">
+
+<a href="/item/107369-HDPE5621D.html" target="_blank" name="prdTableLink">
+pat_stack_code = re.compile(r'^/stockdata/(.*?).html$')
+r'href="/item/(.*?)" target="_blank" name="prdTableLink"'
+stack_code = re.findall(pat_stack_code, href)[0]
+
+
+已经完成
+
+第二步，进入产品界面，然后查看物料性质
+https://www.soliao.com/item/49016-kazanhdpe293284.html
+
+url21 = "https://www.soliao.com/item/"
+
+
+第二步在产品的界面中查询mfi和产品牌号
+
+name 已经得到，下面查询mfi
+<span data-type="name">Lotte 2600FM</span>
+r'href="/item/(.*?)" target="_blank" name="prdTableLink"'
+r'data-type="name">(.*?)</span>'
+
+
+密度：
+ <td width="20%" align="center">0.959</td><td width="20%" align="center">g/cm³</td>
+ r'href="/item/(.*?)" target="_blank" name="prdTableLink"'
+r'<td width="20%" align="center">(.*?)</td><td width="20%" align="center">g/cm³</td>'
+
+cookies = {'soliao': 'A5146DC7CE5784E33F8FC0953BE1398D',
+'Hm_lvt_f6c4e4598d33812086dc5e2503768e39': '1596555883',
+'Hm_lpvt_f6c4e4598d33812086dc5e2503768e39': '1596559409',
+'Qs_lvt_232808':'1596555882',
+'Qs_pv_232808': '2884464672037185000%2C3359777378782894000%2C374224494645803400%2C4245573366232737000%2C1961411700885247200',
+'Hm_lvt_35a4d1b9d054470bb751f0762ac388c1': '1596555887', 
+'Hm_lpvt_35a4d1b9d054470bb751f0762ac388c1': '1596559410',
+'mediav': r'%7B%22eid%22%3A%22500307%22%2C%22ep%22%3A%22%22%2C%22vid%22%3A%22sZ%3F%23Vf%3AYea%3AZz1-n%60%40qU%22%2C%22c…383884e7eb28-4c302273-100200-173ba259320f4',
+'CNZZDATA1260905862': r'1621239961-1596554171-https%253A%252F%252Flink.zhihu.com%252F%7C1596554171', 'nb-referrer-hostname': 'www.soliao.com', 
+'nb-start-page-url': r'https%3A%2F%2Fwww.soliao.com%2Fitem%2F92559-hdpei454404.html', 
+'username': '15256280211',
+'autoCookie': '"15256280211:1597160818624:f558440a3de5e01e4d25068c8c9c83a6417a027b"', 
+'_jfinal_captcha': '4afd521d77158e02aed37e2274b90c9c', 
+'PRODUCT_HISTORY': r'%5B%22HDPE%22%5D', 
+'__asc': 'a038a509173ba26b98a9d341045', 
+'__auc': 'a038a509173ba26b98a9d341045'
+}
